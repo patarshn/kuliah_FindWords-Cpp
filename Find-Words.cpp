@@ -22,6 +22,7 @@ char p13[15]	=	{'P','D','C','R','Z','M','S','N','G','R','D','N','R','P','Z'};
 char p14[15]	= 	{'O','H','N','K','Z','W','A','T','E','R','J','G','T','R','A'};
 char *(puzzle[15]) = {p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14};
 
+//Pemanggil puzzle
 void callPuzzle(){
 	for (int pb=0;pb<15;pb++){
 		for (int pk=0;pk<15;pk++){
@@ -55,51 +56,69 @@ int longOf(char *word){
 	return x;
 }
 
-void doSearch(char word[]){
-int banyak = 0;
+void doSearch (char *(word)){
+int banyak =0;
 	for (int pb=0;pb<15;pb++){
-	for (int pk=0;pk<15;pk++){
-	int ada[8] = {0,0,0,0,0,0,0,0};
-		 if (*(*(puzzle+pb)+pk) == *(word+0)){ 
+		for (int pk=0;pk<15;pk++){
+			int ada[8] = {0,0,0,0,0,0,0,0};
+			if (*(*(puzzle+pb)+pk) == *(word+0)){
+				for(int i=1;i<=longOf(word);i++){
+					if (pb <(15-longOf(word)))
+					if (*(*(puzzle+(pb+i))+pk) == *(word+i)) ada[0]++; //pencarian ke selatan
+					
+					if (pb >=(0+longOf(word)))
+					if (*(*(puzzle+(pb-i))+pk) == *(word+i)) ada[1]++; //pencarian ke utara
+					
+					if (pk <(15-longOf(word)))
+					if (*(*(puzzle+pb)+(pk+i)) == *(word+i)) ada[2]++; //pencarian ke timur
+					
+					if (pk >=(0+longOf(word)))
+					if (*(*(puzzle+pb)+(pk-i)) == *(word+i)) ada[3]++; //pencarian ke barat
+					
+					if (pb <(15-longOf(word)) && pk <(15-longOf(word))) 
+					if (*(*(puzzle+(pb+i))+(pk+i)) == *(word+i)) ada[4]++; //pencarian ke tenggara
+					
+					if (pb <(15-longOf(word)) && pk >=(0+longOf(word)))
+					if (*(*(puzzle+(pb+i))+(pk-i)) == *(word+i)) ada[5]++; //pencarian ke barat daya
+					
+					if (pb >=(0+longOf(word)) && pk <(15-longOf(word)))
+					if (*(*(puzzle+(pb-i))+(pk+i)) == *(word+i)) ada[6]++; //pencarian ke timur laut
+					
+					if (pb >=(0+longOf(word)) && pk >=(0+longOf(word)))
+					if (*(*(puzzle+(pb-i))+(pk-i)) == *(word+i)) ada[7]++; //pencarian ke barat laut
+				}
 			
-			for(int i=1;i<=longOf(word);i++){
-				if (*(*(puzzle+(pb+i))+pk) == *(word+i)) ada[0]++;
-				if (*(*(puzzle+(pb-i))+pk) == *(word+i)) ada[1]++;
-				if (*(*(puzzle+pb)+(pk+i)) == *(word+i)) ada[2]++;
-				if (*(*(puzzle+pb)+(pk-i)) == *(word+i)) ada[3]++;
-				if (*(*(puzzle+(pb+i))+(pk+i)) == *(word+i)) ada[4]++;
-				if (*(*(puzzle+(pb+i))+(pk-i)) == *(word+i)) ada[5]++;
-				if (*(*(puzzle+(pb-i))+(pk+i)) == *(word+i)) ada[6]++;
-				if (*(*(puzzle+(pb-i))+(pk-i)) == *(word+i)) ada[7]++;
-			}
-			if (longOf(word) == 0){ 
-			banyak++;
-			}
-			else{
-			for(int l=0;l<8;l++){
-			if (ada[l] == longOf(word)) {
-			banyak++;
+				if (longOf(word) == 0){
+					banyak++;
+				}
+			
+				else {
+					for(int l=0;l<8;l++){
+						if (ada[l] == longOf(word)) banyak++;
+					}
 				}
 			}
-}
-	
 		}
-	}
+	}		
+
+	if (banyak != 0 ) cout<<"ada\n";
+	else cout<<"tidak\n";	
 }
-if (banyak > 0){
-	cout<<"ada";
-}
-else cout<<"tidak ada";	}
 
 int main(){
 
-callPuzzle();
+callPuzzle();	
+int kata;
+cout<<"Banyak kata yang ingin dicari : ";
+cin>>kata;
+char word[kata][15];
+	for (int i=0;i<kata;i++){
+		cin>>word[i];
+		longOf(*(word+i));
+	}
 
-//input kata yang akan dicari
-char word[15];
-cin>>word;
-toUpper(word);
-longOf(word);
-doSearch(word);
-
+	for (int i=0;i<kata;i++){
+		toUpper(*(word+i));
+		doSearch(*(word+i));
+	}	
 }
