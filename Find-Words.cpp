@@ -59,6 +59,26 @@ cin>>word;
 toUpper(word);
 longOf(word);
 
+//Cara mendefenisikan kalau kata itu sama gimana ya?
+for (int pb=0;pb<15;pb++){
+	for (int pk=0;pk<15;pk++){
+	
+		 if (puzzle[pb][pk] == word[0]){ 
+			
+			for(int i=1;i<=longOf(word);i++){
+				if (puzzle[pb+i][pk] == word[i]) //???????? ; arah bawah
+				if (puzzle[pb-i][pk] == word[i]) //????????; atas
+				if (puzzle[pb][pk+i] == word[i]) //????????; kanan
+				if (puzzle[pb][pk-i] == word[i]) //????????; kiri
+				if (puzzle[pb+i][pk+i] == word[i]) //????????; kanan bawah
+				if (puzzle[pb+i][pk-i] == word[i]) //????????; kiri bawah
+				if (puzzle[pb-i][pk+i] == word[i]) //????????; kanan atas
+				if (puzzle[pb-i][pk-i] == word[i]) //????????; kiri atas
+			}
 
+	
+		}
+	}
+}
 	
 }
