@@ -19,6 +19,15 @@ char toUpper( char *word){
 	}
 }
 
+//ngehitung panjang array
+int longOf(char *word){
+	int x;
+	for (int i=0;word[i] ;i++){
+		x = i;
+	}	
+	return x;
+}
+
 int main(){
   
   char puzzle[15][15] ={{'T','G','B','W','W','I','N','T','E','R','W','S','E','S','N'},
@@ -48,6 +57,7 @@ for (int pb=0;pb<15;pb++){
 char word[15];
 cin>>word;
 toUpper(word);
+longOf(word);
 
 
 	
