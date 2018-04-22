@@ -109,8 +109,7 @@ int main(){
 
 callPuzzle();	
 int kata;
-cout<<"Banyak kata yang ingin dicari : ";
-cin>>kata;
+cin>>kata; //banyak kata yang ingin dicari
 char word[kata][15];
 	for (int i=0;i<kata;i++){
 		cin>>word[i];
