@@ -59,26 +59,38 @@ cin>>word;
 toUpper(word);
 longOf(word);
 
-//Cara mendefenisikan kalau kata itu sama gimana ya?
-for (int pb=0;pb<15;pb++){
+int banyak = 0;
+	for (int pb=0;pb<15;pb++){
 	for (int pk=0;pk<15;pk++){
-	
+	int ada[8] = {0,0,0,0,0,0,0,0};
 		 if (puzzle[pb][pk] == word[0]){ 
 			
 			for(int i=1;i<=longOf(word);i++){
-				if (puzzle[pb+i][pk] == word[i]) //???????? ; arah bawah
-				if (puzzle[pb-i][pk] == word[i]) //????????; atas
-				if (puzzle[pb][pk+i] == word[i]) //????????; kanan
-				if (puzzle[pb][pk-i] == word[i]) //????????; kiri
-				if (puzzle[pb+i][pk+i] == word[i]) //????????; kanan bawah
-				if (puzzle[pb+i][pk-i] == word[i]) //????????; kiri bawah
-				if (puzzle[pb-i][pk+i] == word[i]) //????????; kanan atas
-				if (puzzle[pb-i][pk-i] == word[i]) //????????; kiri atas
+				if (puzzle[pb+i][pk] == word[i]) ada[0]++;
+				if (puzzle[pb-i][pk] == word[i]) ada[1]++;
+				if (puzzle[pb][pk+i] == word[i]) ada[2]++;
+				if (puzzle[pb][pk-i] == word[i]) ada[3]++;
+				if (puzzle[pb+i][pk+i] == word[i]) ada[4]++;
+				if (puzzle[pb+i][pk-i] == word[i]) ada[5]++;
+				if (puzzle[pb-i][pk+i] == word[i]) ada[6]++;
+				if (puzzle[pb-i][pk-i] == word[i]) ada[7]++;
 			}
-
+			if (longOf(word) == 0){ 
+			banyak++;
+			}
+			else{
+			for(int l=0;l<8;l++){
+			if (ada[l] == longOf(word)) {
+			banyak++;
+				}
+			}
+}
 	
 		}
 	}
 }
-	
+if (banyak > 0){
+	cout<<"ada";
+}
+else cout<<"tidak ada";	
 }
